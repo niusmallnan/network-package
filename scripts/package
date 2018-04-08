@@ -7,14 +7,14 @@ SUFFIX=""
 
 cd $(dirname $0)/../package
 
-REPO=${REPO:-rancher}
+REPO=${REPO:-niusmallnan}
 
-for i in */Dockerfile; do
+for i in ${PLUGIN_NAME}/Dockerfile; do
     BASE=$(dirname $i)
     VERSION=$(cat ${BASE}/version)
     TAG=${TAG:-${VERSION}${SUFFIX}}
-    IMAGE=${REPO}/network-${BASE}:${TAG}
-    docker build -f $i -t ${IMAGE} .
+    IMAGE=${REPO}/rancher-${BASE}:${TAG}
+    docker build -f $i -t ${IMAGE} ${BASE}
     echo ${IMAGE} > ../dist/images
     echo Built ${IMAGE}
 done
